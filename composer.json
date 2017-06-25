@@ -1,0 +1,33 @@
+{
+    "name": "mgboateng/eloquent-slugs",
+    "description": "Create elegant slugs in Laravel models with easy",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michael G. Boateng",
+            "email": "mgyan84@gmail.com"
+        }
+    ],
+    "require": {
+        "illuminate/support": "^5.4",
+        "illuminate/database": "^5.4"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "MGBoateng\\EloquentSlugs\\Sluggable\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MGBoateng\\EloquentSlugs\\Test\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^3.4",
+        "orchestra/database": "^3.4",
+        "phpunit/phpunit": "^5.7"
+    },
+    
+    "minimum-stability": "stable"
+}
