@@ -11,11 +11,11 @@
     ],
     "require": {
         "illuminate/support": "^5.4",
-        "illuminate/database": "^5.4"
+        "illuminate/database": "^5.4"        
     },
     "autoload" : {
         "psr-4" : {
-            "MGBoateng\\EloquentSlugs\\Sluggable\\": "src/"
+            "MGBoateng\\EloquentSlugs\\": "src/"
         }
     },
     "autoload-dev": {
@@ -25,8 +25,8 @@
     },
     "require-dev": {
         "orchestra/testbench": "^3.4",
-        "orchestra/database": "^3.4",
-        "phpunit/phpunit": "^5.7"
+        "phpunit/phpunit": "^5.7",
+        "orchestra/database": "^3.4"
     },
     
     "minimum-stability": "stable"
