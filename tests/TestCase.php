@@ -32,7 +32,7 @@ abstract class TestCase extends Orchestra
             'host' => '127.0.0.1',
             'database' => 'test',
             'username' => 'root',
-            'password' => 'gyan84'
+            'password' => ''
         ]);        
     }
 }
