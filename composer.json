@@ -3,11 +3,11 @@
     "description": "Create elegant slugs in Laravel models with easy",
     "type": "library",
     "keywords": [
-        "eloquent-slug",
+        "slug",
         "laravel",
         "eloquet",
         "sluggable",
-        "slug"
+        "eloquent slug"
     ],
     "license": "MIT",
     "authors": [
