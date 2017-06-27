@@ -1,0 +1,9 @@
+language: php
+php:
+- '5.6'
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
+  - php /home/travis/.phpenv/versions/5.6/bin/composer self-update
+services:
+  - mysql
+script: phpunit --configuration phpunit.xml
