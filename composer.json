@@ -6,7 +6,7 @@
         "slug",
         "laravel",
         "eloquet",
-        "sluggable"
+        "sluggable",
         "slugs"
     ],
     "license": "MIT",
