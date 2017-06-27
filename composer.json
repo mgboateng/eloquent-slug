@@ -1,13 +1,13 @@
 {
-    "name": "mgboateng/slug",
+    "name": "mgboateng/eloquent-slug",
     "description": "Create elegant slugs in Laravel models with easy",
     "type": "library",
     "keywords": [
-        "slug",
+        "eloquent-slug",
         "laravel",
         "eloquet",
         "sluggable",
-        "slugs"
+        "slug"
     ],
     "license": "MIT",
     "authors": [
