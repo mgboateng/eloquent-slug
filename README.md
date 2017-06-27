@@ -1,4 +1,7 @@
 # Generate elegant slugs when saving Laravel Eloquent Models 
+
+[![Build Status](https://travis-ci.org/mgboateng/eloquent-slug.svg?branch=master)](https://travis-ci.org/mgboateng/eloquent-slug)
+
 The package provides a trait that allows you to save a unique slugs to your database seamlessly by just specifying the 
 seperator, source and destination field to generate a slug. It is very fast and very light on
 resources as it makes just a single database call when creating a model and two when updating
