@@ -1,5 +1,5 @@
 {
-    "name": "mgboateng/eloquent-slugs",
+    "name": "mgboateng/slug",
     "description": "Create elegant slugs in Laravel models with easy",
     "type": "library",
     "keywords": [
