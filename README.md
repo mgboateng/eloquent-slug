@@ -6,12 +6,6 @@
 <a href="https://packagist.org/packages/mgboateng/eloquent-slug"><img src="https://poser.pugx.org/mgboateng/eloquent-slug/license" alt="License"></a>
 </p>
 
-<!-- [![Build Status](https://travis-ci.org/mgboateng/eloquent-slug.svg?branch=master)](https://travis-ci.org/mgboateng/eloquent-slug)
-[![Latest Stable Version](https://poser.pugx.org/mgboateng/eloquent-slug/v/stable)](https://packagist.org/packages/mgboateng/eloquent-slug)
-[![Total Downloads](https://poser.pugx.org/mgboateng/eloquent-slug/downloads)](https://packagist.org/packages/mgboateng/eloquent-slug)
-[![License](https://poser.pugx.org/mgboateng/eloquent-slug/license)](https://packagist.org/packages/mgboateng/eloquent-slug) -->
-
-
 The package provides a trait that allows you to save a unique slugs to your database seamlessly by just specifying the 
 seperator, source and destination field to generate a slug. It is very fast and very light on
 resources as it makes just a single database call when creating a model and two when updating
@@ -98,6 +92,8 @@ will output:
     'body' => 'Here comes a great programmer'
 ]
 ```
+## Issues
+It currently does not support SQLite due to the use of regular expression not support by it.
 
 ## License
 This software is distributed under the [MIT license.](LICENSE)

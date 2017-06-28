@@ -92,7 +92,9 @@ trait Slugging {
      */
     public function getLatestSlug($slug) 
     {
-        return $this->whereRaw("slug RLIKE '^$slug(-[0-9]+)?$'")
+        $seperator = $this->getSeperator();
+        $destination = $this->getDestination();
+        return $this->whereRaw("$destination RLIKE '^$slug({$seperator}[0-9]+)?$'")
             ->latest('id')
             ->pluck('slug')
             ->first();
