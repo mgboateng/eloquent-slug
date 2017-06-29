@@ -92,8 +92,6 @@ will output:
     'body' => 'Here comes a great programmer'
 ]
 ```
-## Issues
-It currently does not support SQLite due to the use of regular expression not support by it.
 
 ## License
 This software is distributed under the [MIT license.](LICENSE)
