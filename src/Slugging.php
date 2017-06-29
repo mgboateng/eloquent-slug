@@ -13,7 +13,7 @@ trait Slugging {
             $model->generateSlugWhenUpdating();
         });
     }
-
+    
     /**
      * Generates a slug form source to a specified destination column from options set out in $sugOptions property
      * when ever an eloquent model is updating.
@@ -27,18 +27,11 @@ trait Slugging {
             // check if check if the given slug is a modification of the existing
             $slugModified = $this->find($this->id);
       
-            if ($slugModified->{$this->getDestination()} != $slug) {                             
-                $latestSlug = $this->getLatestSlug($slug);
-                if ($latestSlug) {
-                    $slug = $this->newSlug($latestSlug, $slug);
-                    $this->{$this->getDestination()} = $slug;
-                } else {
-                    $this->{$this->getDestination()} = $slug;
-                }                                  
+            if ($slugModified->{$this->getDestination()} != $slug) {
+                $this->{$this->getDestination()} = $this->getLatestSlug($slug);                         
             }
         }
     }
-
 
     /**
      * Generates a slug form source to a specified destination column from options set out in $sugOptions property
@@ -48,13 +41,7 @@ trait Slugging {
     public function generateSlugWhenCreating () 
     {
         $slug = $this->generateSlug();
-
-        $latestSlug = $this->getLatestSlug($slug); 
-        
-        if ($latestSlug) {
-            $slug = $this->newSlug($latestSlug, $slug);
-        }
-        $this->{$this->getDestination()} = $slug;   
+        $this->{$this->getDestination()} = $this->getLatestSlug($slug);   
     }
 
     /**
@@ -72,32 +59,42 @@ trait Slugging {
     }
 
     /**
-     * Generates a new unique slug from inputs by 
-     * @param  string $latestSlug latest insert slug 
-     * @param  sting $slug     
-     * @return sting             
-     */
-    public function newSlug($latestSlug, $slug) 
-    {
-        $pieces = explode($this->getSeperator(), $latestSlug);
-        $number = intval(end($pieces));
-        $slug .= $this->getSeperator() . ($number + 1);
-        return $slug;
-    }
-
-    /**
      * Returns the last saved generated slug from the given parameter
      * @param  string $slug
      * @return string    
+     */
+    
+    /**
+     * Generating unique slug from database
+     * @param  [string] $slug [initial slug generated from the source input]
+     * @return [string]       
      */
     public function getLatestSlug($slug) 
     {
         $seperator = $this->getSeperator();
         $destination = $this->getDestination();
-        return $this->whereRaw("$destination RLIKE '^$slug({$seperator}[0-9]+)?$'")
-            ->latest('id')
-            ->pluck('slug')
-            ->first();
+
+        // search database if slug exists
+        $results = $this->where($destination, 'like', $slug . "%")
+            ->pluck($destination)
+            ->toArray();
+
+        // return initial slug in no match is found
+        if (empty($results)) {
+            return $slug;
+        }
+
+        $searchString = "/^%s(%s[0-9]+)?$/"; // prepare regexp string to find exact match form return results
+  
+        $search = sprintf($searchString, $slug, $seperator);
+        $matches = preg_grep($search, $results);
+
+        foreach ($matches as $match) {
+            $pieces = explode($seperator, $match);
+            $endvalues[] = intval(end($pieces));            
+        }
+        $lastDigit = max($endvalues);
+        return $slug . $seperator . ++$lastDigit;           
     }
 
     /**

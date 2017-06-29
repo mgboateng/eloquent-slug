@@ -9,6 +9,12 @@ class SluggableTest extends TestCase
 {
     use DatabaseTransactions;
 
+    public function setUp() 
+    {
+        parent::setUp();
+        $this->seperator = '_';
+    }
+
     /** @test */
     public function it_saves_a_slug_when_creating_a_model() 
     {
@@ -16,7 +22,7 @@ class SluggableTest extends TestCase
             'title' => 'Hello World',
             'body' => 'Here comes a great programmer'
         ]);
-        $this->assertSame(str_slug('Hello World'), $model->fresh()->slug);
+        $this->assertSame(str_slug('Hello World', $this->seperator), $model->fresh()->slug);
     }
 
     /** @test */
@@ -24,14 +30,14 @@ class SluggableTest extends TestCase
     {
         factory(Post::class, 3)->create(['title' => 'Hello World', 'slug' => null]);
         $model = factory(Post::class)->create(['title' => 'Hello World', 'slug' => null]);
-        $this->assertSame(str_slug('Hello World').'-3', $model->fresh()->slug);
+        $this->assertSame(str_slug('Hello World', $this->seperator). $this->seperator .'3', $model->fresh()->slug);
     }
 
     /** @test */
     public function it_will_generate_a_slug_from_inputs_if_slug_is_set_directly() 
     {
         $model = factory(Post::class)->create(['slug' => 'Hello World']);
-        $this->assertSame(str_slug('Hello World'), $model->fresh()->slug);
+        $this->assertSame(str_slug('Hello World', $this->seperator), $model->fresh()->slug);
     }
 
     /** @test */
@@ -39,7 +45,7 @@ class SluggableTest extends TestCase
     {
         factory(Post::class, 3)->create(['slug' => 'Hello World']);
         $model = factory(Post::class)->create(['slug' => 'Hello World']);
-        $this->assertSame(str_slug('Hello World').'-3', $model->fresh()->slug);
+        $this->assertSame(str_slug('Hello World', $this->seperator) . $this->seperator . '3', $model->fresh()->slug);
     }
 
     /** @test */
@@ -48,7 +54,7 @@ class SluggableTest extends TestCase
         $model = factory(Post::class)->create(['title' => 'Hello World', 'slug' => null]);
         $model->body = "Here comes a greate programmer";
         $model->save();
-        $this->assertEquals(str_slug('Hello World'), $model->fresh()->slug);
+        $this->assertEquals(str_slug('Hello World', $this->seperator), $model->fresh()->slug);
     }
 
     /** @test */
@@ -58,7 +64,7 @@ class SluggableTest extends TestCase
         $model->title = "Hello World";
         $model->slug = null;
         $model->save();
-        $this->assertEquals(str_slug('Hello World'), $model->fresh()->slug);
+        $this->assertEquals(str_slug('Hello World', $this->seperator), $model->fresh()->slug);
     }
 
     /** @test */
@@ -69,7 +75,7 @@ class SluggableTest extends TestCase
         $model->title = "Hello World";
         $model->slug = null;
         $model->save();
-        $this->assertEquals(str_slug('Hello World').'-2', $model->fresh()->slug);
+        $this->assertEquals(str_slug('Hello World', $this->seperator) . $this->seperator . '2', $model->fresh()->slug);
     }
 
     /** @test */
@@ -78,7 +84,7 @@ class SluggableTest extends TestCase
         $model = factory(Post::class)->create();
         $model->slug = "Hello World";
         $model->save();
-        $this->assertEquals(str_slug("hello-world"), $model->fresh()->slug);
+        $this->assertEquals(str_slug("hello-world", $this->seperator), $model->fresh()->slug);
     }
 
     /** @test */
@@ -87,6 +93,6 @@ class SluggableTest extends TestCase
         factory(Post::class)->create(['title' => 'Hello World', 'slug' => null]);
         factory(Post::class)->create(['slug' => 'Hello World']);
         $model = factory(Post::class)->create(['slug' => 'Hello World']);
-        $this->assertEquals(str_slug("hello-world") . '-2', $model->fresh()->slug);
+        $this->assertEquals(str_slug("hello-world", $this->seperator) . $this->seperator . '2', $model->fresh()->slug);
     }
 }

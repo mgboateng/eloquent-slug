@@ -11,7 +11,7 @@ class Post extends Model
     protected $slugSettings = [
         'source' => 'title',
         'destination' => 'slug',
-        'seperator' => '-'
+        'seperator' => '_'
     ];    
     protected $guarded = [];
     
