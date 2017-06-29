@@ -27,12 +27,12 @@ abstract class TestCase extends Orchestra
     public function getEnvironmentSetUp($app) 
     {
         $app['config']->set('database.default', 'testing');
-        $app['config']->set('database.connections.testing', [
-            'driver' => 'mysql',
-            'host' => '127.0.0.1',
-            'database' => 'test',
-            'username' => 'root',
-            'password' => ''
-        ]);        
+        // $app['config']->set('database.connections.testing', [
+        //     'driver' => 'mysql',
+        //     'host' => '127.0.0.1',
+        //     'database' => 'test',
+        //     'username' => 'root',
+        //     'password' => ''
+        // ]);        
     }
 }
