@@ -17,7 +17,7 @@ through your composer json file:
 ```json
 {
     "require": {
-        "mgboateng/eloquent-slugs" : "~1.0"          
+        "mgboateng/eloquent-slugs" : "~0.2"          
     }
 }
 ```
@@ -43,8 +43,8 @@ class Post extends Model
 }
 ```
 The `protected $slugSettings` array sets
-- The source key which indicate to field to be used as source for making slugs
-- The destination key which specifies to field to store generated slugs
+- The source key which indicate the field to be used as source for making slugs
+- The destination key which specifies the field to store generated slugs
 - The seperator key specifies the seperator to use when generating slugs. eg. '-', '_'
 
 When you are creating a model with a settings as:
@@ -74,7 +74,7 @@ an output of
 will be generated.
 
 You could set the destination field (slug in the above example) to generate a unique slug that is
-deferent from the source (title in the above example). When the destination field is directly set
+different from the source (title in the above example). When the destination field is directly set
 it takes precedent over the source field as the source for generating slugs. eg.
 ```php
 Post::create([
